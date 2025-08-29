@@ -1,3 +1,10 @@
+"use client";
+
+import Link from "next/link";
+import { useUser } from "@/hooks/useUser";
+import { useSupabase } from "@/hooks/useSupabase";
+import { useRouter } from "next/navigation";
+
 const SparkleIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
@@ -16,13 +23,49 @@ const SparkleIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 export const Header: React.FC = () => {
+  const { user } = useUser();
+  const { supabase } = useSupabase();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
   return (
     <header className="w-full py-4 px-8 border-b border-gray-700 bg-gray-800/30 backdrop-blur-sm sticky top-0 z-50">
-      <div className="flex items-center justify-center gap-3">
-        <SparkleIcon className="w-6 h-6 text-blue-400" />
-        <h1 className="text-xl font-bold tracking-tight text-gray-100">
-          Pixshop
-        </h1>
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3">
+          <SparkleIcon className="w-6 h-6 text-blue-400" />
+          <h1 className="text-xl font-bold tracking-tight text-gray-100">
+            Pixshop
+          </h1>
+        </Link>
+        <div className="flex items-center gap-4">
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="font-semibold text-white hover:text-blue-400"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="font-semibold text-white hover:text-blue-400"
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="px-4 py-2 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
