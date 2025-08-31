@@ -1,0 +1,62 @@
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  schemas           = ["public"]
+}
+
+
+model Profile {
+  // This relation should reference the "auth.users" table
+  user users  @relation(fields: [uid], references: [id], onDelete: Cascade)
+  uid  String @id @unique @db.Uuid
+
+  firstName    String?
+  lastName     String?
+  credit       Int            @default(2)
+  Transactions Transactions[]
+  Images       Images[]
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime  @default(now())
+
+  @@schema("public")
+}
+
+enum ImageType {
+  ORIGINAL
+  MASK
+  FINAL
+
+  @@schema("public")
+}
+
+model Images {
+  id        Int       @id @default(autoincrement())
+  profileId String    @db.Uuid
+  profile   Profile   @relation(fields: [profileId], references: [uid])
+  url       String // This is the unique id of the image in the hosted service (cloudflare)
+  relatedTo Int? // This is the id of the original image that this image is related to, only for type MASK and FINAL
+  type      ImageType
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+
+  @@schema("public")
+}
+
+model Transactions {
+  id                      Int      @id @default(autoincrement())
+  profileId               String   @db.Uuid
+  profile                 Profile  @relation(fields: [profileId], references: [uid])
+  amount                  Int
+  stripeCheckoutSessionId String
+  updatedAt               DateTime @updatedAt
+  createdAt               DateTime @default(now())
+
+  @@schema("public")
+}
