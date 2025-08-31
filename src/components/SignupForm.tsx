@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/services/supabase";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");

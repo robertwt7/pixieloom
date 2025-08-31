@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/services/supabase";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
@@ -69,7 +69,9 @@ const LoginForm = () => {
           >
             Login
           </button>
-          {error && <p className="mt-4 text-sm text-center text-red-500">{error}</p>}
+          {error && (
+            <p className="mt-4 text-sm text-center text-red-500">{error}</p>
+          )}
         </form>
       </div>
     </div>
