@@ -4,7 +4,7 @@ import { User } from "@supabase/supabase-js";
 
 export const useUser = () => {
   const { supabase } = useSupabase();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(

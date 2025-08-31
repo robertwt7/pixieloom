@@ -1,24 +1,41 @@
 "use client";
 
 import { useUser } from "@/hooks/useUser";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { isProtectedRoute } from "@/config/routes";
+import { Spinner } from "@/components/Spinner";
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { user } = useUser();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isProtected = isProtectedRoute(pathname);
 
   useEffect(() => {
-    if (user === null) {
+    if (user === null && isProtected) {
       router.push("/login");
     }
-  }, [user, router]);
+  }, [user, router, isProtected, pathname]);
 
-  if (user) {
-    return <>{children}</>;
+  if (user === undefined) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
-  return null;
+  if (isProtected && !user) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  return <>{children}</>;
 };
 
 export default AuthGuard;
