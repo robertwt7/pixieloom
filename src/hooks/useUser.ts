@@ -10,7 +10,7 @@ export const useUser = () => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
-      }
+      },
     );
 
     return () => {

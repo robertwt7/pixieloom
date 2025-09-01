@@ -14,6 +14,7 @@ import { CropPanel } from "@/components/CropPanel";
 import { UndoIcon, RedoIcon, EyeIcon } from "../icons";
 import "react-image-crop/src/ReactCrop.scss";
 import { useRouter } from "next/navigation";
+import { StartScreen } from "../StartScreen";
 
 // Helper to convert a data URL string to a File object
 const dataURLtoFile = (dataurl: string, filename: string): File => {
@@ -63,19 +64,6 @@ export const Editor: React.FC = () => {
 
   const [currentImageUrl, setCurrentImageUrl] = useState<string | null>(null);
   const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    const dataUrl = sessionStorage.getItem("uploaded-image");
-    if (dataUrl) {
-      const file = dataURLtoFile(dataUrl, "uploaded-image.png");
-      handleImageUpload(file);
-      // Don't remove the item, so it's there on refresh
-      // sessionStorage.removeItem("uploaded-image");
-    } else {
-      router.push("/");
-    }
-  }, [router]);
-
   // Effect to create and revoke object URLs safely for the current image
   useEffect(() => {
     if (currentImage) {
@@ -341,6 +329,11 @@ export const Editor: React.FC = () => {
     setEditHotspot({ x: originalX, y: originalY });
   };
 
+  const handleFileSelect = (files: FileList | null) => {
+    if (files && files[0]) {
+      handleImageUpload(files[0]);
+    }
+  };
   const renderContent = () => {
     if (error) {
       return (
@@ -358,11 +351,7 @@ export const Editor: React.FC = () => {
     }
 
     if (!currentImageUrl) {
-      return (
-        <div className="flex h-screen w-full items-center justify-center">
-            <Spinner />
-        </div>
-      );
+      return <StartScreen onFileSelect={handleFileSelect} />;
     }
 
     const imageDisplay = (
