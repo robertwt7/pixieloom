@@ -4,9 +4,6 @@ export interface AppType {
 }
 
 export interface ApiType {
-  REPLICATE_API_KEY: string;
-  UPSTASH_REDIS_REST_URL: string;
-  UPSTASH_REDIS_REST_TOKEN: string;
   ZONE_ID: string;
   CLOUDFLARE_ACCOUNT_ID: string;
   CLOUDFLARE_TOKEN: string;
@@ -15,4 +12,5 @@ export interface ApiType {
   STRIPE_PRICE_ID_FIVE_CREDIT: string;
   STRIPE_PRICE_ID_TWENTY_CREDIT: string;
   STRIPE_PRICE_ID_HUNDRED_CREDIT: string;
+  GEMINI_API_KEY: string;
 }

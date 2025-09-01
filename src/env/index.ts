@@ -1,9 +1,6 @@
 import { ApiType, AppType } from "./types";
 
 export const api: ApiType = {
-  REPLICATE_API_KEY: process.env.REPLICATE_API_KEY ?? "",
-  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL ?? "",
-  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN ?? "",
   CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID ?? "",
   CLOUDFLARE_TOKEN: process.env.CLOUDFLARE_TOKEN ?? "",
   ZONE_ID: process.env.ZONE_ID ?? "",
@@ -14,6 +11,7 @@ export const api: ApiType = {
     process.env.STRIPE_PRICE_ID_TWENTY_CREDIT ?? "",
   STRIPE_PRICE_ID_HUNDRED_CREDIT:
     process.env.STRIPE_PRICE_ID_HUNDRED_CREDIT ?? "",
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY ?? "",
 };
 
 export const app: AppType = {
