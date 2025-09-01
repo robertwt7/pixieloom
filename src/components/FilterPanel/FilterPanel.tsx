@@ -18,24 +18,54 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
   const presets = [
     {
-      name: "Synthwave",
+      name: "Kodak Gold 200",
       prompt:
-        "Apply a vibrant 80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.",
+        "Emulate the look of Kodak Gold 200 film with its characteristic warm, golden tones, fine grain, and soft contrast for a nostalgic, sun-kissed feel.",
     },
     {
-      name: "Anime",
+      name: "Kodak Portra 400",
       prompt:
-        "Give the image a vibrant Japanese anime style, with bold outlines, cel-shading, and saturated colors.",
+        "Replicate the aesthetic of Kodak Portra 400 film, known for its beautiful, natural skin tones, muted colors, very fine grain, and low contrast. Ideal for portraits.",
     },
     {
-      name: "Lomo",
+      name: "Kodak Ektar 100",
       prompt:
-        "Apply a Lomography-style cross-processing film effect with high-contrast, oversaturated colors, and dark vignetting.",
+        "Apply the look of Kodak Ektar 100 film, featuring ultra-vivid, highly saturated colors, high contrast, and extremely fine grain. Perfect for vibrant landscapes.",
     },
     {
-      name: "Glitch",
+      name: "Fujifilm Superia 400",
       prompt:
-        "Transform the image into a futuristic holographic projection with digital glitch effects and chromatic aberration.",
+        "Simulate the look of Fujifilm Superia 400 film, emphasizing its cool color palette with rich greens and blues, noticeable grain, and punchy contrast.",
+    },
+    {
+      name: "Fujifilm Pro 400H",
+      prompt:
+        "Create the aesthetic of Fujifilm Pro 400H film, with its signature soft, airy pastel palette, beautiful cyan and mint green tones, and delicate skin tone reproduction.",
+    },
+    {
+      name: "CineStill 800T",
+      prompt:
+        "Give the image a cinematic look inspired by CineStill 800T film. Emphasize cool, blue tones in shadows and create a distinct red halation glow around bright light sources, perfect for nighttime cityscapes.",
+    },
+    {
+      name: "Ilford HP5 Plus 400",
+      prompt:
+        "Convert the image to a classic black and white look emulating Ilford HP5 Plus 400 film, with its iconic punchy contrast, rich blacks, and prominent, beautiful grain structure.",
+    },
+    {
+      name: "Kodak Tri-X 400",
+      prompt:
+        "Apply a gritty, high-contrast black and white effect inspired by Kodak Tri-X 400 film, known for its sharp, distinctive grain and deep blacks, classic for photojournalism.",
+    },
+    {
+      name: "Vintage Agfa",
+      prompt:
+        "Apply a vintage Agfa film style, characterized by its unique muted greens, warm reds, and a slightly faded, nostalgic quality with soft contrast.",
+    },
+    {
+      name: "Instant Polaroid",
+      prompt:
+        "Transform the image to look like a vintage instant Polaroid photo, with soft focus, low contrast, milky blacks, and a classic faded color cast.",
     },
   ];
 

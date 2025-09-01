@@ -3,8 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { UploadIcon, MagicWandIcon, PaletteIcon, SunIcon } from "../icons";
+import { useUser } from "@/hooks/useUser";
+import Link from "next/link";
 
 interface StartScreenProps {
   onFileSelect: (files: FileList | null) => void;
@@ -16,7 +18,40 @@ export const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onFileSelect(e.target.files);
   };
+  const { user } = useUser();
 
+  const renderActionButton = (): ReactNode => {
+    if (!user) {
+      return (
+        <Link
+          href="/login"
+          className="px-4 py-2 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+        >
+          Start Here
+        </Link>
+      );
+    }
+
+    return (
+      <>
+        <label
+          htmlFor="image-upload-start"
+          className="relative inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white bg-blue-600 rounded-full cursor-pointer group hover:bg-blue-500 transition-colors"
+        >
+          <UploadIcon className="w-6 h-6 mr-3 transition-transform duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:scale-110" />
+          Upload an Image
+        </label>
+        <input
+          id="image-upload-start"
+          type="file"
+          className="hidden"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+        <p className="text-sm text-gray-500">or drag and drop a file</p>
+      </>
+    );
+  };
   return (
     <div
       className={`w-full max-w-5xl mx-auto text-center p-8 transition-all duration-300 rounded-2xl border-2 ${isDraggingOver ? "bg-blue-500/10 border-dashed border-blue-400" : "border-transparent"}`}
@@ -42,21 +77,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect }) => {
         </p>
 
         <div className="mt-6 flex flex-col items-center gap-4">
-          <label
-            htmlFor="image-upload-start"
-            className="relative inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white bg-blue-600 rounded-full cursor-pointer group hover:bg-blue-500 transition-colors"
-          >
-            <UploadIcon className="w-6 h-6 mr-3 transition-transform duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:scale-110" />
-            Upload an Image
-          </label>
-          <input
-            id="image-upload-start"
-            type="file"
-            className="hidden"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-          <p className="text-sm text-gray-500">or drag and drop a file</p>
+          {renderActionButton()}
         </div>
 
         <div className="mt-16 w-full">
