@@ -5,15 +5,12 @@ generator client {
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
-  directUrl         = env("DIRECT_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-  schemas           = ["public"]
 }
 
 
 model Profile {
   // This relation should reference the "auth.users" table
-  user users  @relation(fields: [uid], references: [id], onDelete: Cascade)
   uid  String @id @unique @db.Uuid
 
   firstName    String?
@@ -25,15 +22,11 @@ model Profile {
   updatedAt DateTime? @updatedAt
   createdAt DateTime  @default(now())
 
-  @@schema("public")
 }
 
 enum ImageType {
   ORIGINAL
-  MASK
   FINAL
-
-  @@schema("public")
 }
 
 model Images {
@@ -45,8 +38,6 @@ model Images {
   type      ImageType
   updatedAt DateTime  @updatedAt
   createdAt DateTime  @default(now())
-
-  @@schema("public")
 }
 
 model Transactions {
@@ -57,6 +48,4 @@ model Transactions {
   stripeCheckoutSessionId String
   updatedAt               DateTime @updatedAt
   createdAt               DateTime @default(now())
-
-  @@schema("public")
 }
