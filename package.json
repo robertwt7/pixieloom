@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@google/genai": "^1.16.0",
+    "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^6.15.0",
     "@supabase/supabase-js": "^2.56.0",
     "class-variance-authority": "^0.7.1",
@@ -20,9 +21,11 @@
     "prisma": "^6.15.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.63.0",
     "react-image-crop": "^11.0.10",
     "sass": "^1.91.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
