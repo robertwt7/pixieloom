@@ -61,10 +61,8 @@ export const UpdatePassword = () => {
             <input
               id="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password")}
               className="w-full p-3 mt-1 text-gray-100 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
           <div>
@@ -75,12 +73,9 @@ export const UpdatePassword = () => {
               Password
             </label>
             <input
-              id="confirmPassword"
               type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              {...register("confirmPassword")}
               className="w-full p-3 mt-1 text-gray-100 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
           <button
